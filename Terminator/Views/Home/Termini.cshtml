@@ -1,0 +1,93 @@
+﻿@model IEnumerable<TerminiDostave.Models.TermModel>
+
+@{
+    ViewBag.Title = "Termini";
+ }
+
+<h2>Termini</h2>
+
+<p>
+    @Html.ActionLink("Nov Termin", "NarediTermin", null, new { @class = "btn btn-primary btn-md" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AcessPoint)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryTime)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.OpombeDostavljalca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpombeZaposlenega)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    if (item.Company != ViewBag.Company && !User.IsInRole("Administrator") && !User.IsInRole("Skladiscnik")) { continue; }
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Company)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Lastname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Telephone)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DeliveryNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AcessPoint)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.DeliveryTime)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Status)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.OpombeDostavljalca)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.OpombeZaposlenega)
+    </td>
+    <td>
+        @Html.ActionLink("Podrobnosti", "TerminPodrobnosti", new { TrackingNumber = item.TrackingNumber }, new { @class = "btn btn-info btn-md" })
+    </td>
+</tr>
+}
+
+</table>

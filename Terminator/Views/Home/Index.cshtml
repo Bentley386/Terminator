@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Naslovna stran";
+}
+@{
+
+
+    if (@Request.IsAuthenticated)
+    {
+    <div class="jumbotron">
+        <h1>Dobrodošli na terminatorju</h1>
+        <p class="lead">Na tej strani lahko preprosto rezervirate termin za vaše dostave v Lorem-Ipsum. Za rezervacijo pritisnite spodnji gumb.</p>
+        @Html.ActionLink("Rezerviraj termin", "NarediTermin", null,new { @class = "btn btn-primary btn-lg"})
+    </div>
+    <div class="jumbotron">
+        <p class="lead">Za sledenje svojim dostavam pritisnite spodnji gumb.</p>
+        @Html.ActionLink("Prikaži moje termine", "Termini", null, new { @class = "btn btn-primary btn-lg" })
+    </div>
+    }
+    else
+    {
+        <div class="jumbotron">
+            <h1>Dobrodošli na terminatorju</h1>
+            <p class="lead">
+                Na tej strani lahko preprosto rezervirate termin za vaše dostave v Lorem-Ipsum.
+                Trenutno niste prijavljeni. Močno priporočamo, da si ustvarite uporabniški račun za hitrejšo izplonitev obrazcev in preprostejšega sledenja svojim dostavam.</p>
+                @Html.ActionLink("Ustvari račun", "Register", "Account", null, new { @class = "btn btn-warning btn-lg" })
+        </div>
+        <div class="jumbotron">
+            <p>Če se ne želite registrirati, si lahko vseeno termin rezervirate kot gost s klikom na spodnji gumb.</p>
+            @Html.ActionLink("Rezerviraj termin", "NarediTermin", null, new { @class = "btn btn-primary btn-lg" })
+        </div>
+    }
+}

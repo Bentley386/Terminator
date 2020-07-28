@@ -1,0 +1,141 @@
+﻿@model TerminiDostave.Models.TermModel
+@{
+    ViewBag.Title = "Podrobnosti";
+}
+
+<h2>Podrobnosti termina:</h2>
+@{ 
+    if (!Request.IsAuthenticated)
+    {
+    <p>
+        Ker niste prijavljeni, lahko morebitnim spremembam sledite le preko naslednje povezave: <a id="link"></a>
+        <script> 
+            var l = document.getElementById("link");
+            var href = window.location.href;
+            l.innerHTML = href;
+            l.href = href;
+        </script>
+    </p>
+    }
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryNumber)
+        </dd>
+
+        @{
+            if (User.IsInRole("Administrator") || User.IsInRole("Skladiscnik"))
+            {
+        <dt>
+            @Html.DisplayNameFor(model => model.StorageId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StorageId)
+        </dd>
+            }
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.AcessPoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AcessPoint)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpombeDostavljalca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpombeDostavljalca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpombeZaposlenega)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpombeZaposlenega)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a class="btn btn-primary btn-md" href="javascript:window.print()">Natisni</a>
+
+    @{
+        if (User.IsInRole("Skladiscnik"))
+        {
+            @Html.ActionLink("Dodaj Opombo", "TerminUredi", new { TrackingNumber = Model.TrackingNumber }, new { @class = "btn btn-warning btn-md" })
+            <span>  </span>
+            @Html.ActionLink("Potrdi", "TerminPotrdi", new { TrackingNumber = Model.TrackingNumber }, new { @class = "btn btn-success btn-md" })
+            <span>  </span>
+            @Html.ActionLink("Zavrni", "TerminZavrni", new { TrackingNumber = Model.TrackingNumber }, new { @class = "btn btn-danger btn-md" })
+
+        }
+        if (User.IsInRole("Administrator"))
+        {
+            @Html.ActionLink("Uredi", "TerminUredi", new { TrackingNumber = Model.TrackingNumber }, new { @class = "btn btn-primary btn-md" })
+            <span>  </span>
+            @Html.ActionLink("Izbriši", "TerminIzbrisi", new { TrackingNumber = Model.TrackingNumber }, new { @class = "btn btn-danger btn-md" })
+
+        }
+    }
+</p>

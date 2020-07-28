@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "DodajZaposlenega";
+}
+
+<h2>Dodaj delavca</h2>
+
+<form id="myForm" action="/Novzaposleni" method="Post">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <label for="Email" class="control-label col-md-2">Email naslov</label>
+            <input type="text" name="Email" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <label for="roles" class="control-label col-md-2">Funkcija</label>
+            <select class="form-control" id="roles" name="roles">
+                <option value="Administrator">Administrator</option>
+                <option value="Skladiscnik">Skladiščnik</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Promoviraj" class="btn btn-default" />
+        </div>
+    </div>
+
+</form>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
